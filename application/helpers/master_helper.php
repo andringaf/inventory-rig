@@ -91,7 +91,8 @@ class master {
     {
         $CI =& get_instance();
         $CI->load->model(array('master_model'));
-        $data = $CI->master_model->getAll($table);
+        $data = $CI->master_model->getAll($table, $condition);
+        // print_debug($CI->db->last_query());
         return self::returnJsonTable($data);
     }
 

@@ -12,6 +12,7 @@ class T_Rig extends MY_Controller {
     private $_m_type    = 'm_type';
 
     private $_v_t_rig   = 'v_t_rig';
+    private $_v_t_rig_update   = 'v_t_rig_update';
 
     private $_id        = 'id';
     
@@ -46,7 +47,7 @@ class T_Rig extends MY_Controller {
         $condition = array();
         if(!empty($id)) {
             $condition = array('id_rig' => $id);
-        }
+        }   
         return master::responseGetData($this->_v_t_rig, $condition);
     }
 
@@ -64,21 +65,22 @@ class T_Rig extends MY_Controller {
 
     public function saveData()
     {        
+        // print_debug($this->input->post());  
+
         // $this->form_validation->set_rules($this->_id, 'ID Tipe', 'required|is_unique['.$this->_table.'.'.$this->_id.']');
         $this->form_validation->set_rules('id_rig', 'Lokasi RIG ', 'trim|required');
-        $this->form_validation->set_rules('id_type', 'Jenis Barang ', 'trim|required');
-        $this->form_validation->set_rules('id_rig', 'Lokasi RIG ', 'trim|required');
+        $this->form_validation->set_rules('id_barang_gpu', 'GPU ', 'trim|required');
+        // $this->form_validation->set_rules('id_rig', 'Lokasi RIG ', 'trim|required');
 
         $data = $this->input->post();
         // print_debug($data);
-        $data = array(
-            'id_rig'    => $this->input->post('id_rig'),
-            'id_barang' => $this->input->post('id_barang'),
-            'id_type'   => $this->input->post('id_type'),
-        );
+        // $data = array(
+        //     'id_rig'    => $this->input->post('id_rig'),
+        //     'id_barang' => $this->input->post('id_barang'),
+        //     'id_type'   => $this->input->post('id_type'),
+        // );
         // unset($data['id_rig']);
         if ($this->form_validation->run() == TRUE ) {
-            // $data = $this->input->post();
             return master::saveData($data, $this->_table);
         }
     }
@@ -92,14 +94,14 @@ class T_Rig extends MY_Controller {
     public function editData()
     {
         $data   = $this->input->post('id');
-        return master::getDataById(array($this->_id => $data), $this->_table);
+        return master::getDataById(array('id' => $data), $this->_v_t_rig_update);
     }
 
     public function updateData()
     {
-        $id_rig      = $this->input->post($this->_id);
-        $name_rig    = $this->input->post('name_rig');
-        return master::updateData(array('name_rig' => $name_rig), array($this->_id => $id_rig), $this->_table);
+       $id      = $this->input->post('id');
+       $data = $this->input->post();
+        return master::updateData($data, array($this->_id => $id), $this->_table);
     }
 
 }

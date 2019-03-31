@@ -10,6 +10,7 @@
 			</div>
 			<div class="modal-body">
 				<form id="form_status">
+					<input type="hidden" id="id">
 					<div class="form-group">
 						<select style="width: 100%;" class="form-control" name="id_rig" id="id_rig" autocomplete="off"></select>
 						<small id="id_rig_help" class="form-text text-muted">Pilih RIG yang masih memiliki SLOT</small>

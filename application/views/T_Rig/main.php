@@ -171,8 +171,17 @@
 			$('#id_rig').attr('disabled', 'disabled');
 			$('#save').css('display', 'none');
 			$('#update').css('display', 'block');
-			$('#id_rig').val(result.data[0].id_rig);
-			$('#name_rig').val(result.data[0].name_rig);
+			$('#id').val(result.data[0].id);
+			defaultValueSelect2("#id_rig", result.data[0].id_rig, result.data[0].name_rig)
+			defaultValueSelect2("#id_barang_gpu", result.data[0].id_barang_gpu, result.data[0].name_barang_gpu)
+			$('#count_gpu').val(result.data[0].count_gpu);
+			defaultValueSelect2("#id_barang_gpu", result.data[0].id_barang_gpu, result.data[0].name_barang_gpu)
+			defaultValueSelect2("#id_barang_psu_1", result.data[0].id_barang_psu_1, result.data[0].name_barang_psu_1)
+			defaultValueSelect2("#id_barang_psu_2", result.data[0].id_barang_psu_2, result.data[0].name_barang_psu_2)
+			defaultValueSelect2("#id_barang_ram", result.data[0].id_barang_ram, result.data[0].name_barang_ram)
+			defaultValueSelect2("#id_barang_mobo", result.data[0].id_barang_mobo, result.data[0].name_barang_mobo)
+			defaultValueSelect2("#id_barang_usb", result.data[0].id_barang_usb, result.data[0].name_barang_usb)
+			defaultValueSelect2("#id_barang_ssd", result.data[0].id_barang_ssd, result.data[0].name_barang_ssd)
 		})
 	}
 
@@ -208,7 +217,19 @@
 		$.ajax({
 			type: 'POST',
 			url: '<?php echo $update; ?>',
-			data: { id_rig: $('#id_rig').val(), name_rig: $('#name_rig').val() }
+			data: { 
+				id: $('#id').val(),
+				id_rig: $('#id_rig').val(),
+				id_barang_gpu: $('#count_gpu').val(),
+				count_gpu: $('#count_gpu').val(),
+				id_barang_psu_1: $('#id_barang_psu_1').val(),
+				id_barang_psu_2: $('#id_barang_psu_2').val(),
+				id_barang_ram: $('#id_barang_ram').val(),
+				id_barang_mobo: $('#id_barang_mobo').val(),
+				id_barang_usb: $('#id_barang_usb').val(),
+				id_barang_ssd: $('#id_barang_ssd').val(),
+
+			}
 		})
 		.done(function(result) {
 			$('#addModal').modal('toggle');
@@ -241,11 +262,22 @@
 
 		$('#id_rig').removeAttr('disabled');
 		$('#id_rig').val(null).trigger("change");
-		$('#id_type').val(null).trigger("change");
-		$('#id_barang').val(null).trigger("change");
+		$('#count_gpu').val(null);
+		$('#id_barang_gpu').val(null).trigger("change");
+		$('#id_barang_psu_1').val(null).trigger("change");
+		$('#id_barang_psu_2').val(null).trigger("change");
+		$('#id_barang_ram').val(null).trigger("change");
+		$('#id_barang_mobo').val(null).trigger("change");
+		$('#id_barang_usb').val(null).trigger("change");
+		$('#id_barang_ssd').val(null).trigger("change");
 
 		$('#save').css('display', 'block');
 		$('#update').css('display', 'none');
 	})
+
+	function defaultValueSelect2(fieldId, id, val) {
+		var $newOption = $("<option selected='selected'></option>").val(id).text(val);
+		$(fieldId).append($newOption).trigger('change');
+	}
 
 </script>

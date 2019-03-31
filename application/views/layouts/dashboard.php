@@ -28,7 +28,7 @@
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">GPU</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="id_type_3"></span></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-save fa-2x text-gray-300"></i>
@@ -45,7 +45,7 @@
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">PSU</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="id_type_psu"></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-plug fa-2x text-gray-300"></i>
@@ -64,7 +64,7 @@
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Motherboard</div>
 						<div class="row no-gutters align-items-center">
 							<div class="col-auto">
-								<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0</div>
+								<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span id="id_type_5"></span></div>
 							</div>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">RAM</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="id_type_4"></span></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-memory fa-2x text-gray-300"></i>
@@ -108,7 +108,7 @@
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">SSD</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="id_type_7"></span></div>
 					</div>
 					<div class="col-auto">
 						<i class="fas fa-hdd fa-2x text-gray-300"></i>
@@ -124,7 +124,7 @@
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
 						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">USB</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="id_type_6"></span></div>
 					</div>
 					<div class="col-auto">
 						<i class="fab fa-usb fa-2x text-gray-300"></i>
@@ -177,7 +177,7 @@
 
 			$.map(data, function(item) {
 				// $('#card-rig').hide();
-				$('#card-rig').prepend(cardRigList(item.id_rig, item.name_rig, 5));
+				$('#card-rig').prepend(cardRigList(item.id_rig, item.name_rig, item.items_value));
 				$('#card-rig').show('slow');
 				// $('#rig-' + item.id_rig).show('slow');
 				$('#rig-' + item.id_rig).click(function(e) {
@@ -188,6 +188,27 @@
 
 
 		})
+		$.ajax({
+			url: '<?php echo $count_result; ?>',
+			method: 'GET',
+			dataType: 'json',
+		})
+		.done(function(res) {
+			let num = 1;
+			let data = res.data;
+			let psu = 0;
+
+			$.map(data, function(item) {
+				if (item.id_type == 1 || item.id_type == 2 ) {
+				psu =  psu + parseInt(item.count);
+				}else{
+				$('#id_type_' + item.id_type).text(item.count);
+				}
+			});
+			$('#id_type_psu').text(psu);
+
+		});
+
 	});
 
 	function cardRigList(id, title, count) {
@@ -205,7 +226,7 @@
 			html += `<div class="row no-gutters align-items-center">`;
 			html += `<div class="col mr-2">`;
 			html += `<div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><strong><h6>${title}</h6></strong></div>`;
-			html += `<div class="h5 mb-0 font-weight-bold text-gray-800"><h6><span style="width: ${sum}%; background-color: ${color}; color: white" class="badge">9</span></h6></div>`;
+			html += `<div class="h5 mb-0 font-weight-bold text-gray-800"><h6><span style="width: ${sum}%; background-color: ${color}; color: white" class="badge">${count}</span></h6></div>`;
 			html += `</div>`;
 			html += `<div class="col-auto">`;
 			html +=	`<i class="fas fa-server fa-2x text-gray-300"></i>`;

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Welcome extends MY_Controller {
 
 	private $_m_rig 	= 'm_rig';
+	private $_v_count_barang = 'v_count_barang';
 	private $_module 	= 'Welcome';
 
 	/**
@@ -26,6 +27,7 @@ class Welcome extends MY_Controller {
 		$data = array(
 			'content'		=> 'layouts/dashboard',
 			'rig_result'	=> site_url( $this->_module . '/loadRigData' ),
+			'count_result'	=> site_url( $this->_module . '/countDataBarang' ),
 		);
 
 		$this->load->view('welcome_message', $data);
@@ -34,5 +36,9 @@ class Welcome extends MY_Controller {
 	public function loadRigData()
 	{
 		return master::responseGetData($this->_m_rig);
+	}
+	public function countDataBarang()
+	{
+		return master::responseGetData($this->_v_count_barang);
 	}
 }
