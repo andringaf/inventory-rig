@@ -12,7 +12,7 @@
 	</h1>
 </div>
 
-<button class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#addModal">
+<button class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#addModal" onclick="cekid();">
 	<span class="icon text-white-50">
 		<i class="fas fa-plus"></i>
 	</span>
@@ -41,6 +41,7 @@
 </div>
 
 <?php $this->load->view($form, array('action' => $action)); ?>
+<?php $this->load->view($form_kondisi, array('action' => $action)); ?>
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -108,7 +109,8 @@
 					render: function (data, type, row) {
 						let button =`
 							<button onclick="deleteData(${data})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-							<button onclick="editData(${data})" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>`;
+							<button onclick="editData(${data})" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-pen"></i></button>
+							<button onclick="editKondisi(${data})" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-search"></i></button>`;
 						return button;
 					}
 				}
@@ -182,6 +184,16 @@
 			defaultValueSelect2("#id_barang_mobo", result.data[0].id_barang_mobo, result.data[0].name_barang_mobo)
 			defaultValueSelect2("#id_barang_usb", result.data[0].id_barang_usb, result.data[0].name_barang_usb)
 			defaultValueSelect2("#id_barang_ssd", result.data[0].id_barang_ssd, result.data[0].name_barang_ssd)
+		})
+	}
+	function editKondisi(data) {
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo $edit; ?>',
+			data: { id: data },
+		})
+		.done(function(result) {
+			$('#addModalKondisi').modal('toggle');
 		})
 	}
 
@@ -278,6 +290,13 @@
 	function defaultValueSelect2(fieldId, id, val) {
 		var $newOption = $("<option selected='selected'></option>").val(id).text(val);
 		$(fieldId).append($newOption).trigger('change');
+	}
+	function cekid(){
+		let id_rig = '<?php echo $id_rig; ?>';
+		let name_rig = '<?php echo $name_rig; ?>';
+		if (id_rig != '' && name_rig != ''){
+			defaultValueSelect2("#id_rig", id_rig,name_rig )
+		}
 	}
 
 </script>

@@ -25,18 +25,29 @@ class T_Rig extends MY_Controller {
 
     public function index( $id = '' )
     {
+        if (!empty($id)) {
+        $d = $this->master_model->getById(array('id_rig' => $id),$this->_m_rig)->result();
+        $id_rig = $d[0]->id_rig;
+        $name_rig = $d[0]->name_rig;
+        }else{
+        $id_rig = '';
+        $name_rig = '';
+        }
         $data = array(
             'content'       => $this->_module . '/main',
             'title'         => $this->_title,
             'class'         => $this->_module,
             'form'          => $this->_module . '/form',
+            'form_kondisi'  => $this->_module . '/form2',
             'dataSource'    => site_url( $this->_module . '/getData/' . $id ),
             'action'        => site_url( $this->_module . '/saveData'),
             'delete'        => site_url( $this->_module . '/deleteData'),
             'edit'          => site_url( $this->_module . '/editData'),
             'update'        => site_url( $this->_module . '/updateData'),
             'rigSource'     => site_url( $this->_module . '/getDataRig' ),
-            'brgSource'     => site_url( $this->_module . '/getDataBarang' )
+            'brgSource'     => site_url( $this->_module . '/getDataBarang' ),
+            'id_rig'            => $id_rig,
+            'name_rig'      => $name_rig
         );
 
         $this->load->view('welcome_message', $data);        
