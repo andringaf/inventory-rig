@@ -10,6 +10,8 @@ class T_Rig extends MY_Controller {
 
     private $_m_rig     = 'm_rig';
     private $_m_type    = 'm_type';
+    private $_m_barang    = 'm_barang';
+    private $_t_service = 't_service';
 
     private $_v_t_rig   = 'v_t_rig';
     private $_v_t_rig_update   = 'v_t_rig_update';
@@ -113,6 +115,32 @@ class T_Rig extends MY_Controller {
        $id      = $this->input->post('id');
        $data = $this->input->post();
         return master::updateData($data, array($this->_id => $id), $this->_table);
+    }
+    public function transferService()
+    {
+        $type = master::getDataSelect($this->_m_barang, array('id_barang' => $this->input->post('id_barang')));
+        $type = json_decode($type->final_output);
+        $type = $type->data;
+        $type = $type[0]->id_type;
+
+        $field = $this->input->post('field');
+        $id      = $this->input->post('id');
+
+        $data = array(
+            'id_t_rig'    => $id,
+            'id_rig'    => $this->input->post('id_rig'),
+            'serial_number' => $this->input->post('serial_number'),
+            'id_barang'   => $this->input->post('id_barang'),
+            'name_barang '   => $this->input->post('name_barang'),
+            'id_type '   => $type,
+            'id_status_barang '   => '2',
+        );
+        master::saveData($data, $this->_t_service);
+        $dataupdate = array(
+             $field     => '',
+        );
+        return master::updateData($dataupdate, array($this->_id => $id), $this->_table);
+
     }
 
 }

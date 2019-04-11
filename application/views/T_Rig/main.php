@@ -177,7 +177,6 @@
 			defaultValueSelect2("#id_rig", result.data[0].id_rig, result.data[0].name_rig)
 			defaultValueSelect2("#id_barang_gpu", result.data[0].id_barang_gpu, result.data[0].name_barang_gpu)
 			$('#count_gpu').val(result.data[0].count_gpu);
-			defaultValueSelect2("#id_barang_gpu", result.data[0].id_barang_gpu, result.data[0].name_barang_gpu)
 			defaultValueSelect2("#id_barang_psu_1", result.data[0].id_barang_psu_1, result.data[0].name_barang_psu_1)
 			defaultValueSelect2("#id_barang_psu_2", result.data[0].id_barang_psu_2, result.data[0].name_barang_psu_2)
 			defaultValueSelect2("#id_barang_ram", result.data[0].id_barang_ram, result.data[0].name_barang_ram)
@@ -194,6 +193,62 @@
 		})
 		.done(function(result) {
 			$('#addModalKondisi').modal('toggle');
+			$('#rig').text(result.data[0].name_rig);
+			$('#gpu').text(result.data[0].name_barang_gpu);
+			$('#psu-1').text(result.data[0].name_barang_psu_1);
+			$('#psu-2').text(result.data[0].name_barang_psu_2);
+			$('#ram').text(result.data[0].name_barang_ram);
+			$('#mtb').text(result.data[0].name_barang_mobo);
+			$('#usb').text(result.data[0].name_barang_usb);
+			$('#ssd').text(result.data[0].name_barang_ssd);
+
+			if (result.data[0].name_barang_gpu == '' || result.data[0].name_barang_gpu == null) {
+				document.getElementById('button_gpu').style.display="none";
+			}else{
+				document.getElementById('button_gpu').style.display="";	
+			}
+			if(result.data[0].name_barang_psu_1 == '' || result.data[0].name_barang_psu_1 == null){
+				document.getElementById('button_psu_1').style.display="none";
+			}else{
+				document.getElementById('button_psu_1').style.display="";	
+			}
+			if(result.data[0].name_barang_psu_2 == '' || result.data[0].name_barang_psu_2 == null){
+				document.getElementById('button_psu_2').style.display="none";
+			}else{
+				document.getElementById('button_psu_2').style.display="";	
+			}
+			if(result.data[0].name_barang_ram == '' || result.data[0].name_barang_ram == null){
+				document.getElementById('button_ram').style.display="none";
+			}else{
+				document.getElementById('button_ram').style.display="";	
+			}
+			if(result.data[0].name_barang_mobo == '' || result.data[0].name_barang_mobo == null){
+				document.getElementById('button_mobo').style.display="none";
+			}else{
+				document.getElementById('button_mobo').style.display="";	
+			}
+			if(result.data[0].name_barang_usb == '' || result.data[0].name_barang_usb == null){
+				document.getElementById('button_usb').style.display="none";
+			}else{
+				document.getElementById('button_usb').style.display="";	
+			}
+			if(result.data[0].name_barang_ssd == '' || result.data[0].name_barang_ssd == null){
+				document.getElementById('button_ssd').style.display="none";
+			}else{
+				document.getElementById('button_ssd').style.display="";	
+			}
+			
+			$('#id_kondisi').val(result.data[0].id);
+			$('#id_rig_kondisi').val(result.data[0].id_rig);
+			$('#id_barang_gpu_kondisi').val(result.data[0].id_barang_gpu);
+			$('#id_barang_psu_1_kondisi').val(result.data[0].id_barang_psu_1);
+			$('#id_barang_psu_2_kondisi').val(result.data[0].id_barang_psu_2);
+			$('#id_barang_ram_kondisi').val(result.data[0].id_barang_ram);
+			$('#id_barang_mobo_kondisi').val(result.data[0].id_barang_mobo);
+			$('#id_barang_usb_kondisi').val(result.data[0].id_barang_usb);
+			$('#id_barang_ssd_kondisi').val(result.data[0].id_barang_ssd);
+
+
 		})
 	}
 

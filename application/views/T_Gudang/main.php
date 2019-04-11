@@ -37,7 +37,7 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
+	</div>	
 </div>
 
 <?php $this->load->view($form, array('action' => $action)); ?>
@@ -73,17 +73,68 @@
 	});	
 
 		function editData(data) {
+			let dataStatus = [
+				{id: 0, text: '-- Pilih Status --' },
+				{id: 1, text: 'OUT' },
+				{id: 2, text: 'SERVICE' }
+			];
+			$.ajax({
+				type: 'GET',
+				url: '<?php echo $dataSource; ?>' + '/' + data,
+				data: { id: data },
+			})
+			.done(function(result) {
+				$('#id_gudang').val(result.data[0].id_gudang);
+				defaultValueSelect2("#id_barang", result.data[0].id_barang, result.data[0].name_barang)
+				$('#status').select2({data: dataStatus});
+				if(result.data[0].status_id == null || result.data[0].status_id == ''){
+					$('#status').val(0);
+					$('#status').trigger('change');
+				}else{
+					$('#status').val(result.data[0].status_id);
+					$('#status').trigger('change');
+				}
+				
+				
+				$('#addModal').modal('toggle');
+			})
+	}
+
+	$('#update').on('click', function() {
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo $edit; ?>',
-			data: { id: data },
+			url: '<?php echo $update; ?>',
+			data: { 
+                id_gudang: $('#id_gudang').val(), 
+                id_barang: $('#id_barang').val(), 
+				id_status: $('#status').val()
+            }
 		})
 		.done(function(result) {
-			defaultValueSelect2("#id_barang", result.data[0].id_barang, result.data[0].name_barang)
-			defaultValueSelect2("#status", result.data[0].status_id, result.data[0].status_name)
+			$('#dataTable').DataTable().ajax.reload();
 			$('#addModal').modal('toggle');
-		})
-	}
+			if(!result.error) {
+				$('#tab-alert').append(`
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong>${result.data} </strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>`);
+			} else {
+				$('#tab-alert').append(`
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<strong>${result.data} </strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>`);
+			}
+			setTimeout(() => {
+				$('.alert').alert('close');
+			}, 1500);
+		});
+	})
 
 	function defaultValueSelect2(fieldId, id, val) {
 		var $newOption = $("<option selected='selected'></option>").val(id).text(val);
