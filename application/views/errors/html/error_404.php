@@ -1,64 +1,103 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<!-- <?php
+//defined('BASEPATH') OR exit('No direct script access allowed');
+?> -->
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>404 Page Not Found</title>
-<style type="text/css">
 
-::selection { background-color: #E13300; color: white; }
-::-moz-selection { background-color: #E13300; color: white; }
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+  <title>SB Admin 2 - 404</title>
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
+  <!-- Custom fonts for this template-->
+  <link href="<?php echo config_item('base_url') ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
 
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
+  <!-- Custom styles for this template-->
+  <link href="<?php echo config_item('base_url') ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
+  <!-- Jquery.ui -->
+  <link href="<?php echo config_item('base_url') ?>/assets/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="<?php echo config_item('base_url') ?>/assets/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet">
 
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
+  <!-- Jquery Confirm -->
+  <link href="<?php echo config_item('base_url') ?>/assets/css/jquery-confirm.min.css" rel="stylesheet">
 
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+  <!-- Custom styles for this page -->
+  <link href="<?php echo config_item('base_url') ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <!-- Select2 -->
+  <link href="<?php echo config_item('base_url') ?>/assets/css/select2/select2.min.css" rel="stylesheet">
+  <link href="<?php echo config_item('base_url') ?>/assets/css/select2/select2.min.css.4.0.0.css" rel="stylesheet">
+
 </head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
-	</div>
+
+<body id="page-top">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- 404 Error Text -->
+          <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+            <a href="index.html">&larr; Back to Dashboard</a>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+ 
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+
+
+<!-- Core plugin JavaScript-->
+<script src="<?php echo config_item('base_url') ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Jquery.ui -->
+<script src="<?php echo config_item('base_url') ?>/assets/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="<?php echo config_item('base_url') ?>/assets/js/sb-admin-2.min.js"></script>
+
+<!-- Jquery Confirm -->
+<script src="<?php echo config_item('base_url') ?>/assets/js/jquery-confirm.min.js"></script>
+
+<!-- Select2 -->
+<script src="<?php echo config_item('base_url') ?>/assets/js/select2/select2.min.js"></script>
+<script src="<?php echo config_item('base_url') ?>/assets/js/select2/select2.min.js.4.0.0.js"></script>
+
+ <!-- Page level plugins -->
+ <!-- <script src="<?php // echo config_item('base_url') ?>/assets/vendor/chart.js/Chart.min.js"></script> -->
+
+<!-- Page level custom scripts -->
+<!-- <script src="<?php // echo config_item('base_url') ?>/assets/js/demo/chart-area-demo.js"></script> -->
+<!-- <script src="<?php // echo config_item('base_url') ?>/assets/js/demo/chart-pie-demo.js"></script> -->
+
+<!-- Page level plugins -->
+<script src="<?php echo config_item('base_url') ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo config_item('base_url') ?>/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
 </body>
+
 </html>

@@ -28,6 +28,7 @@ class Welcome extends MY_Controller {
 			'content'		=> 'layouts/dashboard',
 			'rig_result'	=> site_url( $this->_module . '/loadRigData' ),
 			'count_result'	=> site_url( $this->_module . '/countDataBarang' ),
+			'user'			=> $this->ion_auth->user()->row()->first_name,
 		);
 
 		$this->load->view('welcome_message', $data);
