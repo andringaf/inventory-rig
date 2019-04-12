@@ -129,15 +129,23 @@ class T_Rig extends MY_Controller {
         $a = $this->input->post('jumlah');
         $b = $this->input->post('jumlah_awal');
         $c = $b - $a;
-        if ($a == $b) {            
-            $dataupdate = array(
-              $field     => '',
-              'count_gpu'     => '0',
-            );  
+
+        if($type == '3'){
+            if ($a == $b) {            
+                $dataupdate = array(
+                  $field      => '',
+                  'count_gpu' => '0',
+                );  
+            }else{
+                $dataupdate = array(
+                    'count_gpu' => $c,
+                );       
+            }
         }else{
             $dataupdate = array(
-              'count_gpu'     => $c,
-            );  
+                $field       => '',
+                'count_gpu'  => '0',
+            );    
         }
 
          $data = array(

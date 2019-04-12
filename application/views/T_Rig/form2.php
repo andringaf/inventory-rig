@@ -198,6 +198,7 @@
 					}
 				})
 				.done(function(result) {
+					$('#serial_number').val('');
 					$('#addSerialTransfer').modal('hide');	
 					$('#addModalKondisi').modal('hide');
 					$('#dataTable').DataTable().ajax.reload();
