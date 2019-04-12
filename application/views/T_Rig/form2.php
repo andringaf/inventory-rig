@@ -21,6 +21,7 @@
 					<input type="hidden" name="id_barang_mobo_kondisi" id="id_barang_mobo_kondisi">
 					<input type="hidden" name="id_barang_usb_kondisi" id="id_barang_usb_kondisi">
 					<input type="hidden" name="id_barang_ssd_kondisi" id="id_barang_ssd_kondisi">
+					<input type="hidden" name="count_gpu_kondisi" id="count_gpu_kondisi">
 						<table class="table table-hover">
 					    <thead>
 					      <tr>
@@ -101,7 +102,10 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<small class="form-text text-muted">- Serial Number -</small>
 				<input type="text" class="form-control" id="serial_number">
+				<small id="label_count" class="form-text text-muted">- Jumlah -</small>
+				<input type="number" class="form-control" id="count_kondisi">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -116,6 +120,8 @@
     var field = '';
     var name_barang = '';
 	function transfer(id){
+		var j = $('#count_gpu_kondisi').val();
+		$('#count_kondisi').val(j);
 		switch(id) {
 		  case 1:
 		   id_tf_barang = $('#id_barang_gpu_kondisi').val();
@@ -153,8 +159,17 @@
 		   name_barang = document.getElementById("ssd").innerText;
 		    break;  
 		}
+			if (field == 'id_barang_gpu') {
+				$('#addSerialTransfer').modal('toggle');
+				document.getElementById("count_kondisi").style.display = "block";
+				document.getElementById("label_count").style.display = "block";
+				}else{
+				$('#addSerialTransfer').modal('toggle');
+				document.getElementById("count_kondisi").style.display = "none";
+				document.getElementById("label_count").style.display = "none";
+		  		$('#count_kondisi').val(1);
 
-		$('#addSerialTransfer').modal('toggle');	
+			}
 		}
 
 		function trasferAction(){
@@ -178,6 +193,8 @@
 						field: field,
 						name_barang: name_barang,
 						id: $('#id_kondisi').val(),
+						jumlah: $('#count_kondisi').val(),
+						jumlah_awal: $('#count_gpu_kondisi').val(),
 					}
 				})
 				.done(function(result) {

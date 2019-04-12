@@ -176,7 +176,11 @@
 			$('#id').val(result.data[0].id);
 			defaultValueSelect2("#id_rig", result.data[0].id_rig, result.data[0].name_rig)
 			defaultValueSelect2("#id_barang_gpu", result.data[0].id_barang_gpu, result.data[0].name_barang_gpu)
-			$('#count_gpu').val(result.data[0].count_gpu);
+			if (result.data[0].id_barang_gpu == '' || result.data[0].id_barang_gpu == null) {
+				$('#count_gpu').val(0);
+			}else{
+				$('#count_gpu').val(result.data[0].count_gpu);
+			}
 			defaultValueSelect2("#id_barang_psu_1", result.data[0].id_barang_psu_1, result.data[0].name_barang_psu_1)
 			defaultValueSelect2("#id_barang_psu_2", result.data[0].id_barang_psu_2, result.data[0].name_barang_psu_2)
 			defaultValueSelect2("#id_barang_ram", result.data[0].id_barang_ram, result.data[0].name_barang_ram)
@@ -247,6 +251,7 @@
 			$('#id_barang_mobo_kondisi').val(result.data[0].id_barang_mobo);
 			$('#id_barang_usb_kondisi').val(result.data[0].id_barang_usb);
 			$('#id_barang_ssd_kondisi').val(result.data[0].id_barang_ssd);
+			$('#count_gpu_kondisi').val(result.data[0].count_gpu);
 
 
 		})
@@ -287,7 +292,7 @@
 			data: { 
 				id: $('#id').val(),
 				id_rig: $('#id_rig').val(),
-				id_barang_gpu: $('#count_gpu').val(),
+				id_barang_gpu: $('#id_barang_gpu').val(),
 				count_gpu: $('#count_gpu').val(),
 				id_barang_psu_1: $('#id_barang_psu_1').val(),
 				id_barang_psu_2: $('#id_barang_psu_2').val(),

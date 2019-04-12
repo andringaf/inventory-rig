@@ -126,7 +126,21 @@ class T_Rig extends MY_Controller {
         $field = $this->input->post('field');
         $id      = $this->input->post('id');
 
-        $data = array(
+        $a = $this->input->post('jumlah');
+        $b = $this->input->post('jumlah_awal');
+        $c = $b - $a;
+        if ($a == $b) {            
+            $dataupdate = array(
+              $field     => '',
+              'count_gpu'     => '0',
+            );  
+        }else{
+            $dataupdate = array(
+              'count_gpu'     => $c,
+            );  
+        }
+
+         $data = array(
             'id_t_rig'    => $id,
             'id_rig'    => $this->input->post('id_rig'),
             'serial_number' => $this->input->post('serial_number'),
@@ -134,11 +148,26 @@ class T_Rig extends MY_Controller {
             'name_barang '   => $this->input->post('name_barang'),
             'id_type '   => $type,
             'id_status_barang '   => '2',
+            'count '   => $this->input->post('jumlah'),
         );
-        master::saveData($data, $this->_t_service);
-        $dataupdate = array(
-             $field     => '',
+        $exist = $this->master_model->getById(array('id_t_rig' => $id,'id_rig'    => $this->input->post('id_rig'),'id_barang'   => $this->input->post('id_barang'),'serial_number' => $this->input->post('serial_number')),$this->_t_service);
+        $row = $exist->result();
+        if($exist->num_rows() > 0){
+            $dataupdateservice = array(
+            'id_t_rig'    => $id,
+            'id_rig'    => $this->input->post('id_rig'),
+            'serial_number' => $this->input->post('serial_number'),
+            'id_barang'   => $this->input->post('id_barang'),
+            'name_barang '   => $this->input->post('name_barang'),
+            'id_type '   => $type,
+            'id_status_barang '   => '2',
+            'count '   => $row[0]->count + $a,
         );
+             master::updateData($dataupdateservice, array($this->_id => $row[0]->id), $this->_t_service);
+        }else{
+            master::saveData($data, $this->_t_service);
+        }
+        
         return master::updateData($dataupdate, array($this->_id => $id), $this->_table);
 
     }

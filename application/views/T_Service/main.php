@@ -120,6 +120,7 @@
 			$('#id_tipe').val(result.data[0].id_type);
 			$('#id_rig').val(result.data[0].id_rig);
 			$('#id_t_rig').val(result.data[0].id_t_rig);
+			$('#count').val(result.data[0].count);
 		})
 	}
 
@@ -139,6 +140,7 @@
 					id_t_rig: $('#id_t_rig').val(),
 					place: param,
 					serial_number: $('#serial_number').val(),
+					count: $('#count').val(),
 	            }
 			})
 			.done(function(result) {

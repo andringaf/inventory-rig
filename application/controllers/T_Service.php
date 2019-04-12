@@ -93,6 +93,7 @@ class T_Service extends MY_Controller {
             'id_type'           => $type,
             'id_barang'         => $this->input->post('id_barang'),
             'id_rig'            => $this->input->post('id_rig'),
+            'count'   => $this->input->post('count'),
             'serial_number'     => $this->input->post('serial_number'),
         );
         switch ($type) {
@@ -120,7 +121,8 @@ class T_Service extends MY_Controller {
         }
 
         $dataUpdate = array(
-            $field        => $this->input->post('id_barang')
+            $field        => $this->input->post('id_barang'),
+            'count_gpu'   => $this->input->post('count'),
         );
 
         if ($place == 'gudang') {

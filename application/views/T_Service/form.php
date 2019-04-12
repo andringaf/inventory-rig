@@ -16,6 +16,7 @@
 					<input type="hidden" id="id_tipe">
 					<input type="hidden" id="id_rig">
 					<input type="hidden" id="serial_number">
+					<input type="hidden" id="count">
 					<div class="text-center">
 					<a onclick="trasferservice('gudang')" href="#" class="btn btn-danger btn-icon-split">
 						<span class="icon text-white-50">
