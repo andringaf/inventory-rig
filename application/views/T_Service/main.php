@@ -121,6 +121,7 @@
 			$('#id_rig').val(result.data[0].id_rig);
 			$('#id_t_rig').val(result.data[0].id_t_rig);
 			$('#count').val(result.data[0].count);
+			$('#jumlah_gpu').val(result.data[0].count);
 		})
 	}
 
@@ -128,8 +129,17 @@
 		var $newOption = $("<option selected='selected'></option>").val(id).text(val);
 		$(fieldId).append($newOption).trigger('change');
 	}
+
 	function trasferservice(param){
-			$.ajax({
+		if ($('#id_tipe').val() == '3' && param == 'rig') {
+			$('#addModalJumlah').modal('toggle');
+		}else{
+			actionTrasfer(param);
+		}
+	}
+
+	function actionTrasfer(param){
+		$.ajax({
 				type: 'POST',
 				url: '<?php echo $update; ?>',
 				data: { 
@@ -141,6 +151,7 @@
 					place: param,
 					serial_number: $('#serial_number').val(),
 					count: $('#count').val(),
+					jumlah_gpu: $('#jumlah_gpu').val(),
 	            }
 			})
 			.done(function(result) {

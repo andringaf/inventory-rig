@@ -88,7 +88,7 @@ class T_Service extends MY_Controller {
         $place = $this->input->post('place');
         $type = $this->input->post('id_type');
         $field = "";
-
+        $cond = array('id_barang_gpu' => $this->input->post('id_barang'),'id' => $id_t_rig,'id_rig'    => $this->input->post('id_rig'));
         $data = array(
             'id_type'           => $type,
             'id_barang'         => $this->input->post('id_barang'),
@@ -119,11 +119,19 @@ class T_Service extends MY_Controller {
                 $field = 'id_barang_ssd';
                 break;
         }
-
-        $dataUpdate = array(
+      
+        $exist = $this->master_model->getById($cond,$this->_t_rig);
+        $row = $exist->result();
+        if($exist->num_rows() > 0){
+            $dataUpdate = array(
+                'count_gpu'   => $row[0]->count_gpu +  $this->input->post('jumlah_gpu'),
+            ); 
+        }else{
+           $dataUpdate = array(
             $field        => $this->input->post('id_barang'),
             'count_gpu'   => $this->input->post('count'),
-        );
+           ); 
+        }
 
         if ($place == 'gudang') {
            master::saveData($data, $this->_t_gudang);

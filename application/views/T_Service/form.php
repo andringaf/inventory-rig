@@ -38,3 +38,34 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="addModalJumlah" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addModalLabel">Transfer Barang</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="form_status">
+					<div class="form-group">
+						<small class="form-text text-muted">- Jumlah GPU -</small>
+						<input type="number" class="form-control" id="jumlah_gpu">
+					</div>
+					<div class="text-center">
+					<a onclick="actionTrasfer('rig')" href="#" class="btn btn-warning btn-icon-split">
+						<span class="icon text-white-50">
+						<i class="fas fa-arrow-right"></i>
+						</span>
+						<span class="text">Transfer to Rig</span>
+					</a>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
